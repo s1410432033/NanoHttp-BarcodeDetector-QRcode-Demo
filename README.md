@@ -9,7 +9,7 @@
 
 3.gralde加入    
 
-```android
+```Android
 implementation files('libs/nanohttpd-2.2.0.jar')
 ```
 
