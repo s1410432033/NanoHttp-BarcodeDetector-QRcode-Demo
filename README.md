@@ -9,7 +9,7 @@
 
 3.gralde加入    
 
-```
+```android
 implementation files('libs/nanohttpd-2.2.0.jar')
 ```
 
@@ -18,7 +18,7 @@ implementation files('libs/nanohttpd-2.2.0.jar')
   首先，先創立一個Server！
   
   在return newFixedLengthResponse裡就是放要回送的Response。
-```
+```android
 public class MyServer extends NanoHTTPD {
     public MyServer(int port) {
         super(port);
@@ -38,7 +38,7 @@ public class MyServer extends NanoHTTPD {
   再來，創立一個Service用來啟動Server，這樣不會造成到畫面上的Delay。
   
   別忘了在Manifest加入Service申請！
-  ```
+  ```android
   public class ServerService extends Service {
 
     @Nullable
@@ -67,12 +67,12 @@ public class MyServer extends NanoHTTPD {
   
   ## 設置
   1.在gradle加入
-  ```
+  ```android
   compile 'com.google.android.gms:play-services-vision:15.0.1'
   ```
   ## Layout畫面
   畫面上設置一個SurfaceView跟一個TextView放掃描結果。
-  ```
+  ```android
   <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -97,7 +97,7 @@ public class MyServer extends NanoHTTPD {
 </RelativeLayout>
   ```
   ## 設置BarcodeDetector
-  ```
+  ```android
   barcodeDetector = new BarcodeDetector.Builder(this)
                 .setBarcodeFormats(Barcode.QR_CODE)
                 .build();
@@ -105,7 +105,7 @@ public class MyServer extends NanoHTTPD {
   ## 設置CameraSource
   在setRequestedPreviewSize屬性中是設置FPS setAutoFocusEnabled是設置是否要有焦點。
   
-  ```
+  ```android
   cameraSource = new CameraSource.Builder(this, barcodeDetector)
                 .setRequestedPreviewSize(640, 480)
                 .setAutoFocusEnabled(true)
@@ -120,7 +120,7 @@ public class MyServer extends NanoHTTPD {
     如果一次掃了多個QRcode，它的都會放到這個陣列中，另外因為掃描頻率很快，所以通常掃到了一筆實際上已經回傳了很幾筆一樣的了，
     所以寫了一個addInList方法取出跟上次不同結果的值。
 
-```
+```android
         barcodeDetector.setProcessor(new Detector.Processor<Barcode>() {
             @Override
             public void release() {
